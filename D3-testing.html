@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/css-main.css" media="screen">
+    <title>D3 Experimenting</title>
+</head>
+        <body>
+        <div class="chart"></div>
+        <div id ="rectangle"></div>
+        <script src="js/d3.js"></script>
+        <script type="text/javascript">
+            var data = [4, 8, 15, 16, 23, 42];
+            var x = d3.scale.linear()
+                .domain([0, d3.max(data)])
+                .range([0, 420]);
+
+            d3.select(".chart")
+                .selectAll("div")
+                .data(data)
+                .enter().append("div")
+                .style("width", function(d) {
+                return x(d) + "px";
+            })
+                .text(function(d) {
+                return d;
+            });
+            </script>
+        <script type="text/javascript">
+            var rect = d3.select("#rectangle")
+                .append("svg")
+                .attr("width", 350)
+                .attr("height", 175);
+            rect.append("rect")
+                .style("stroke", "black")
+                .style("fill", "orange")
+                .attr("width", 250)
+                .attr("height", 145)
+                .attr("x", 50)
+                .attr("y", 50)
+                .on("mouseover", function(){d3.select(this).style("fill", "purple");})
+                .on("mouseout", function(){d3.select(this).style("fill", "orange");});
+                
+        </script>
+</body>
+</html>
